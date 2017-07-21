@@ -1,0 +1,41 @@
+---
+title:
+author: "cjlortie"
+date: "2017"
+output:
+  html_document:
+    theme: spacelab
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+<br>
+![](./silene.jpg)
+<br>
+
+#Global cushion dataset
+###Purpose
+To explore the importance of cushion-forming plant species as foundation species in the alpine.
+
+###Meta-data  
+A set of data collected by ecologists globally at their respective alpine study sites. Sampling was structured using the dominant plant species at high-elevation meadows. The dominant lifeform used was cushion-forming, and association patterns of the local plant species with cushions relative to 'open' microsites were recorded.
+
+###Data
+```{r, data, warning=FALSE, message=FALSE}
+library(tidyverse)
+
+#data
+data <- read_csv("data/global_cushion_community_data.csv")
+
+#quick check
+#library(devtools)
+#devtools::install_github("hadley/colformat")
+#devtools::install_github("ropenscilabs/skimr")
+library(skimr)
+d <- skim(data)
+d
+
+```
+
