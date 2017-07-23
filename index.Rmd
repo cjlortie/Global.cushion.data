@@ -23,7 +23,7 @@ To explore the importance of cushion-forming plant species as foundation species
 A set of data collected by ecologists globally at their respective alpine study sites. Sampling was structured using the dominant plant species at high-elevation meadows. The dominant lifeform used was cushion-forming, and association patterns of the local plant species with cushions relative to 'open' microsites were recorded.
 
 ###Data
-```{r, data, warning=FALSE, message=FALSE}
+```{r, data, warning=FALSE, message=FALSE, cache=TRUE}
 library(tidyverse)
 
 #data
@@ -36,6 +36,10 @@ data <- read_csv("data/global_cushion_community_data.csv")
 library(skimr)
 d <- skim(data)
 d
+
+meta.data <- read_csv("data/cushion_site_metadata.csv")
+meta.data
+
 
 ```
 
