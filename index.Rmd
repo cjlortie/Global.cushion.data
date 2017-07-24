@@ -22,21 +22,10 @@ To explore the importance of cushion-forming plant species as foundation species
 ###Meta-data  
 A set of data collected by ecologists globally at their respective alpine study sites. Sampling was structured using the dominant plant species at high-elevation meadows. The dominant lifeform used was cushion-forming, and association patterns of the local plant species with cushions relative to 'open' microsites were recorded.
 
-###Data
-```{r, data, warning=FALSE, message=FALSE, cache=TRUE}
+###Meta-data-QA
+```{r, meta-data, warning=FALSE, message=FALSE, cache=TRUE}
 library(tidyverse)
-
-#data
-data <- read_csv("data/global_cushion_community_data.csv")
-
-#quick check
-#library(devtools)
-#devtools::install_github("hadley/colformat")
-#devtools::install_github("ropenscilabs/skimr")
-library(skimr)
-d <- skim(data)
-d
-
+#meta-data check
 meta.data <- read_csv("data/cushion_site_metadata.csv")
 meta.data
 
@@ -47,3 +36,22 @@ map + geom_point(data=meta.data, aes(x=long, y=lat)) + labs(x = "longitude", y =
 
 ```
 
+###Data-QA
+```{r, data, warning=FALSE, message=FALSE, cache=TRUE}
+#data
+data <- read_csv("data/global_cushion_community_data.csv")
+
+#quick check
+#library(devtools)
+#devtools::install_github("hadley/colformat")
+#devtools::install_github("ropenscilabs/skimr")
+#view summary stats across entire df
+library(skimr)
+d <- skim(data)
+d
+
+#wrangle by site and/or in-out microsites
+
+
+
+```
