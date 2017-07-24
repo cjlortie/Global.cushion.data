@@ -51,7 +51,7 @@ d <- skim(data)
 d
 
 #wrangle by site and/or in-out microsites
-
-
+#microsites <- data %>% mutate(sum=Reduce("+",.[6:1038]))
+#microsites <- microsites %>% group_by(ID, cushion.open) %>% mutate(total = sum(sum))
 
 ```
