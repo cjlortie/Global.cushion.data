@@ -292,11 +292,21 @@ d</code></pre>
 ## 
 ## Character Variables
 ## # A tibble: 2 x 9
-##            var      type complete missing empty     n   min   max n_unique
-## *        &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
-## 1   cushion_sp character    12280       0     0 12280    10    29       40
-## 2 cushion.open character    12280       0     0 12280     4     7        3</code></pre>
-<pre class="r"><code>#wrangle by site and/or in-out microsites</code></pre>
+##          var      type complete missing empty     n   min   max n_unique
+## *      &lt;chr&gt;     &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;
+## 1 cushion_sp character    12280       0     0 12280    10    29       40
+## 2  microsite character    12280       0     0 12280     4     7        3</code></pre>
+<pre class="r"><code>#wrangle by microsite and by species
+#get row sums
+data &lt;- data %&gt;% mutate(totals = rowSums(.[5:1038]))
+
+#group by microsite
+micro &lt;- data %&gt;% group_by(ID, microsite) %&gt;% summarise(total.ab = sum(totals), sd.ab = sd(totals), mean.ab = mean(totals), se = sd(totals)/sqrt(length(totals)))
+
+#group by species
+species &lt;-  data %&gt;% select(-cushion_sp, -sample) %&gt;%  group_by(ID, microsite) %&gt;% summarise_all(funs(sum))
+
+species &lt;- data %&gt;% select(-cushion_sp, -sample) %&gt;%  group_by(ID, microsite) %&gt;% summarise_all(sum)</code></pre>
 </div>
 </div>
 

@@ -50,8 +50,17 @@ library(skimr)
 d <- skim(data)
 d
 
-#wrangle by site and/or in-out microsites
-#microsites <- data %>% mutate(sum=Reduce("+",.[6:1038]))
-#microsites <- microsites %>% group_by(ID, cushion.open) %>% mutate(total = sum(sum))
+#wrangle by microsite and by species
+#get row sums
+data <- data %>% mutate(totals = rowSums(.[5:1038]))
+
+#group by microsite
+micro <- data %>% group_by(ID, microsite) %>% summarise(total.ab = sum(totals), sd.ab = sd(totals), mean.ab = mean(totals), se = sd(totals)/sqrt(length(totals)))
+
+#group by species
+species <-  data %>% select(-cushion_sp, -sample) %>%  group_by(ID, microsite) %>% summarise_all(funs(sum))
+
+species <- data %>% select(-cushion_sp, -sample) %>%  group_by(ID, microsite) %>% summarise_all(sum)
+
 
 ```
