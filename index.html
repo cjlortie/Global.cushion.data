@@ -304,9 +304,11 @@ data &lt;- data %&gt;% mutate(totals = rowSums(.[5:1038]))
 micro &lt;- data %&gt;% group_by(ID, microsite) %&gt;% summarise(total.ab = sum(totals), sd.ab = sd(totals), mean.ab = mean(totals), se = sd(totals)/sqrt(length(totals)))
 
 #group by species
-species &lt;-  data %&gt;% select(-cushion_sp, -sample) %&gt;%  group_by(ID, microsite) %&gt;% summarise_all(funs(sum))
+species &lt;- data %&gt;% select(-cushion_sp, -sample) %&gt;%  group_by(ID, microsite) %&gt;% summarise_all(sum)
 
-species &lt;- data %&gt;% select(-cushion_sp, -sample) %&gt;%  group_by(ID, microsite) %&gt;% summarise_all(sum)</code></pre>
+#good but now need to wrangle out for each site just for the species that are present the site in either microsite
+
+#then need to classify them as in or out</code></pre>
 </div>
 </div>
 
