@@ -62,6 +62,8 @@ species <- data %>% select(-cushion_sp, -sample) %>%  group_by(ID, microsite) %>
 
 #good but now need to wrangle out for each site just for the species that are present the site in either microsite
 
+#consider wrangling data frame to make it long
+
 #then need to classify them as in or out
 
 
