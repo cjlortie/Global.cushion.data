@@ -57,8 +57,15 @@ data <- data %>% mutate(totals = rowSums(.[5:1038]))
 #group by microsite
 micro <- data %>% group_by(ID, microsite) %>% summarise(total.ab = sum(totals), sd.ab = sd(totals), mean.ab = mean(totals), se = sd(totals)/sqrt(length(totals)))
 
+skim(micro)
+
+#summary(micro)
+#calculate rii
+
 #group by species
 species <- data %>% select(-cushion_sp, -sample) %>%  group_by(ID, microsite) %>% summarise_all(sum)
+
+#tidy dataframe to add a species.ID column
 
 #good but now need to wrangle out for each site just for the species that are present the site in either microsite
 
