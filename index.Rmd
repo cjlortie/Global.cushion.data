@@ -64,6 +64,24 @@ skim(micro)
 
 #group by species
 species <- data %>% select(-cushion_sp, -sample) %>%  group_by(ID, microsite) %>% summarise_all(sum)
+species <- species %>% gather(3:1037, key = "species", value = "counts")
+
+ggplot(species, aes(counts, fill = microsite)) +
+  geom_dotplot() + 
+  scale_fill_brewer(palette = "Paired") +
+  labs(x = "number of individuals", y = "relative frequency")
+
+simplified.species <- species %>% mutate(presence = case_when(counts > 0 ~ 1, counts == 0 ~ 0))
+
+presence <- simplified.species %>% group_by(ID, microsite) %>% tally(presence)
+
+ggplot(presence, aes(microsite, n)) +
+  geom_boxplot()
+
+ggplot(presence, aes(n, fill = microsite)) +
+  geom_dotplot() + 
+  scale_fill_brewer(palette = "Paired") +
+  labs(x = "number of unique species", y = "relative frequency")
 
 #tidy dataframe to add a species.ID column
 
